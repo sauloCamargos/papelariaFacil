@@ -1,0 +1,28 @@
+<div id="sidebar" >
+  <div class="sidebar-title">
+    <div class="sidebar-img">
+      <img src="/assets/img/logo.png" alt="logo" />
+    </div>
+    <button type="button" (click)="appSvc.setSidebarOpen(false)">
+      <i class="fa fa-fw fa-times" id="sidebarIcon" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="sidebar-menu">
+    <div class="sidebar-link " routerLinkActive="active_menu_link">
+      <i class="fa fa-fw fa-home"></i>
+      <a [routerLink]="[ '/admin/overview' ]" >Dashboard</a>
+
+    </div>
+    <h2>Gerenciamento</h2>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+
+      <a [routerLink]="[ '/admin/users' ]">Usuários</a>
+    </div>
+
+    <div class="sidebar-logout">
+      <i class="fa fa-fw fa-power-off"></i>
+      <a href="#">Log out</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<!-- <img class="img-responsive login-brand" src="assets/img/logo_white.png" alt="" srcset=""> -->
+<div class="login-wrapper">
+  <div class="form-login">
+    <div class="form-wrapper">
+      <img class="img-responsive login-brand" src="/assets/img/logo.png" alt="" srcset="">
+      <h1 class="text-center mt-0">
+        <small>Recuperação de senha</small>
+      </h1>
+      <p class="text-center">
+        Informe seu e-mail para enviarmos as informações para recuperação de sua senha.
+      </p>
+
+      <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="errorCredentials">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> Usuário ou senha inválidos.
+      </div>
+      <form [formGroup]="f" novalidate>
+        <!-- <div class="form-group has-feedback" [ngClass]="{'has-success': f.controls['email'].valid, 'has-error': f.controls['email'].invalid && (f.controls['email'].touched || f.controls['email'].dirty)}">
+            <input type="email" formControlName="email" class="form-control" id="InputEmail" placeholder="Email">
+            <span *ngIf="f.controls['email'].valid" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+            <span >
+              <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+              <span class="text-danger">E-mail inválido.</span>
+            </span>
+          </div> -->
+
+
+        <mat-form-field class="form-group">
+          <input matInput placeholder="Email" formControlName="email" autocomplete="on">
+          <mat-error *ngIf="f.controls['email'].invalid && (f.controls['email'].touched || f.controls['email'].dirty)">
+            <!-- <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span> -->
+            E-mail inválido
+          </mat-error>
+        </mat-form-field>
+
+
+        <div class="form-group text-center">
+          <button type="submit" class="btn-block" mat-flat-button color="primary" [disabled]="f.invalid || inProgress" (click)="onSubmit()">Solicitar recuperação</button>
+        </div>
+        <div class="form-group">
+          <div class="text-center">
+            <a routerLink="/auth/login">
+              Voltar para login
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

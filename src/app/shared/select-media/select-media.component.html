@@ -1,0 +1,104 @@
+<button type="button" class="btn btn-large btn-block btn-success" data-toggle="modal"
+  [attr.data-target]="data_target">{{labelButton}}</button>
+
+
+<div [class]="obg_class"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel">Selecione a mídia</h4>
+        </div>
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs" id="optTab{{id}}">
+            <li class="active">
+              <a href="#upload{{id}}" data-toggle="tab">Enviar mídia</a>
+            </li>
+            <li>
+              <a href="#select{{id}}" data-toggle="tab">Selecionar mídia</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="nav-tabs-custom">
+
+          <div class="tab-content">
+            <div class="active tab-pane" id="upload{{id}}">
+              <div class="box-body">
+                <app-loading [loading]="carregando"></app-loading>
+                <image-upload [url]="urlUploadFile" [buttonCaption]="'Selecionar arquivo'"
+                  [dropBoxMessage]="'Largar arquivos em qualquer lugar para carregar \n ou'"
+                  [extensions]="['jpg','jpeg','png','gif']" [class]="'modalFiles'" (removed)="onRemoved($event)"
+                  (uploadFinished)="onUploadFinished($event)" (uploadStateChanged)="onUploadStateChanged($event)">
+                </image-upload>
+
+              </div>
+            </div>
+            <div class="tab-pane" id="select{{id}}">
+              <div class="row section-courses-teacher">
+                <div class="col-md-8">
+
+                  <app-loading [loading]="carregandoMidias"></app-loading>
+                  <div class="col-md-12 container-files">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let file of files">
+                      <!-- <div class="thumbnail thumbnail-file" [ngClass]="{'active': file == fileSelect}" (click)="defineSelect(file)">
+                                                <img [src]="file?.url" alt="" data-fileSrc="" class="product-img">
+                                            </div> -->
+                      <div class="thumbnail thumbnail-file" [title]="file.file"
+                        [ngClass]="{'active': file == fileSelect}" (click)="defineSelect(file)">
+                        <img *ngIf="fileImage(file.type)" [src]="file.url" alt="" class="product-img">
+
+                        <span class="icon-file-other" *ngIf="file.type == 'pdf'">
+                          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                          {{file.file}}
+                        </span>
+                        <span class="icon-file-other" *ngIf="file.type == 'doc'">
+                          <i class="fa fa-file-word-o icon-file-other" aria-hidden="true"></i>
+                          {{file.file}}
+                        </span>
+                        <span class="icon-file-other" *ngIf="file.type == 'rar' || file.type == 'zip'">
+                          <i class="fa fa-file-archive-o icon-file-other" aria-hidden="true"></i>
+                          {{file.file}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 sidebar-wrapper">
+                  <div class="sidebar-container">
+
+                    <div class="sidebar-file">
+                      <div class="file-preview">
+                        <img class="img-responsive" *ngIf="fileAccept(fileSelect?.type)" [src]="fileSelect?.url" alt=""
+                          srcset="">
+                      </div>
+                      <div class="file-details">
+                        <ul class="list-group">
+                          <li class="list-group-item"><strong>Tipo:</strong> {{fileSelect?.type}}</li>
+                          <li class="list-group-item"><strong>Mime:</strong> {{fileSelect?.mime}}</li>
+                          <li class="list-group-item"><strong>Url:</strong> {{fileSelect?.url}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.tab-content -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)='saveSelect()'>Selecionar arquivo</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+</div>

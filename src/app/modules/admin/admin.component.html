@@ -1,0 +1,8 @@
+<div class="container" [ngClass]="{'open-sidebar': (appSvc.getShowSidebarToggle && appSvc.getSidebarOpen)}">
+  <app-header></app-header>
+  <main class="main-container">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-sidebar [ngClass]="{'sidebar-responsive': appSvc.getShowSidebarToggle && appSvc.getSidebarOpen}"></app-sidebar>
+</div>

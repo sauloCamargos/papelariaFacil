@@ -1,0 +1,154 @@
+.modal-lg {
+    width: 95%;
+}
+
+.thumbnail-file {
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 15px 0px 0px 0px;
+}
+
+.nav-tabs-custom>.nav-tabs {
+    padding: 0px 15px;
+}
+
+.nav-tabs-custom {
+    box-shadow: none;
+    margin: 0px;
+    background: transparent;
+}
+
+.modal-heading {
+    padding: 15px;
+}
+
+.modal-content {
+    background-color: #fcfcfc;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    background: #fff;
+}
+
+.container-files {
+    height: 550px;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+.thumbnail-file {
+    height: 135px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.thumbnail.thumbnail-file.active {
+    box-shadow: 0px 0px 4px 3px #3c8dbc;
+}
+
+.sidebar-file img.img-responsive {
+    max-height: 265px;
+    margin: 0px auto;
+}
+
+.sidebar-file .file-preview {
+    min-height: 300px;
+    padding: 25px 15px 10px;
+    background: #fff;
+}
+
+.sidebar-wrapper {
+    background: #e6e6e6;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-left: 1px solid #e6e6e6;
+}
+
+.list-group {
+    padding-top: 20px;
+}
+
+.list-group-item {
+    border-radius: 0px !important;
+    border: none;
+    background: transparent;
+    word-break: break-all;
+    padding: 2px 15px;
+}
+
+.sidebar-container {
+    background: #e6e6e6;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    border-radius: 0px;
+    border: 0px;
+    width: 100%;
+}
+
+.thumbnail-file-wapper button {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.thumbnail-file-wapper {
+    margin-bottom: 30px;
+}
+
+.thumbnail-file {
+    margin-bottom: 10px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.thumbnail-file img {
+    max-height: 150;
+    width: auto;
+    margin: 0px auto;
+}
+
+.thumbnail-actions {
+    border: 1px solid #dddd;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #fff;
+}
+
+.thumbnail-actions button {
+    border: none;
+}
+
+span.icon-file-other {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.container-scroll {
+    max-height: initial;
+    height: 640px;
+}
+
+.icon-file-other i {
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,48 @@
+<div class="login-wrapper">
+  <div class="form-login">
+    <div class="form-wrapper">
+
+      <div [ngSwitch]="stepValidation">
+        <div class="row">
+          <img class="img-responsive login-brand" src="/assets/img/logo.png" alt="" srcset="">
+          <div class="col-md-10 col-md-offset-1">
+            <h1 class="text-center">
+              Realizando a validação do email.
+              <!-- <small>Verifique seu endereço de e-mail</small> -->
+              <small *ngSwitchCase="1"><br>...Obtendo informações para validaçao...</small>
+              <small *ngSwitchCase="2"><br>...Validando os dados do email...</small>
+              <small *ngSwitchCase="3"><br>...Preparando para atualizar os dados de usuário...</small>
+              <small *ngSwitchCase="4"><br>...Atualizando os dados do usuário...</small>
+              <br>
+            </h1>
+          </div>
+        </div>
+        <ng-container *ngSwitchCase="5">
+          <h3 class="text-center">Uhuuuuuu! \o/</h3>
+          <p class="text-center">
+            O seu e-mail foi validado com sucesso.<br> Seja bem vindo ao <strong>UDILaudos</strong>!
+          </p>
+          <div class="text-center">
+
+            <button class="btn-block" mat-flat-button color="primary" (click)="goToDashboard()" type="button">
+              Ir para dashboard
+            </button>
+          </div>
+        </ng-container>
+        <ng-container class="text-center" *ngSwitchCase="6">
+          <h3 class="text-center">Ops! Algo de errado aconteceu</h3>
+
+          <p class="text-justify">
+            Não foi possível validar os seus dados! Realize o login novamente para revalidarmos suas informações.
+          </p>
+          <div class="text-center">
+
+            <button style="margin-bottom: 1rem;" (click)="authSvc.logout()" type="button" id="kt_login_signin_submit" class="btn btn-brand btn-pill btn-elevate">
+              <span *ngIf="!inLoading">Ir para login</span>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

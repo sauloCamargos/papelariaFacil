@@ -1,0 +1,79 @@
+<div class="login-wrapper">
+  <div class="form-login">
+    <div class="form-wrapper">
+      <img class="img-responsive login-brand" src="/assets/img/logo.png" alt="" srcset="">
+      <h1 class="text-center mt-0">
+        <small>Definir nova senha</small>
+      </h1>
+
+      <div class="alert alert-danger alert-dismissible" role="alert" *ngIf="errorCredentials">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> Usuário ou senha inválidos.
+      </div>
+      <form [formGroup]="f" (ngSubmit)="setPassword($event)" novalidate>
+
+        <mat-form-field class="form-group">
+          <input matInput placeholder="Email" formControlName="email" autocomplete="on">
+          <mat-error *ngIf="f.controls['email'].invalid && (f.controls['email'].touched || f.controls['email'].dirty) && !f.controls['email'].errors.required">
+            <!-- <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span> -->
+            E-mail inválido
+          </mat-error>
+          <mat-error *ngIf="f.controls['email'].invalid && (f.controls['email'].touched || f.controls['email'].dirty) && f.controls['email'].errors.required">
+            <!-- <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span> -->
+            Informe e-mail para validarmos sua solicitação!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <input type="password" matInput placeholder="Nova senha" formControlName="password">
+          <mat-error *ngIf="f.controls['password'].invalid && (f.controls['password'].touched || f.controls['password'].dirty) && f.controls['password'].errors.required">
+            <!-- <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span> -->
+            Informe a nova senha!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <input type="password" matInput placeholder="Confirme nova senha" formControlName="password_confirmation">
+          <mat-error *ngIf="f.controls['password_confirmation'].invalid && (f.controls['password_confirmation'].touched || f.controls['password_confirmation'].dirty) && f.controls['password_confirmation'].errors.MatchPassword">
+            <!-- <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span> -->
+            As senhas não coicidem, verifique-as e tente novamente!
+          </mat-error>
+        </mat-form-field>
+
+
+        <!-- <div class="col-sm-12">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" formControlName="email" name="email" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Nova senha</label>
+              <input type="password" formControlName="password" name="password" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Confirme nova senha</label>
+              <input type="password" formControlName="password_confirmation" name="password_confirmation" class="form-control" required>
+            </div>
+          </div> -->
+
+        <div class="form-group text-center">
+          <button type="submit" class="btn-block" mat-flat-button color="primary" >Redefinir senha</button>
+        </div>
+        <div class="form-group">
+          <div class="text-center">
+            <a routerLink="/auth/login">
+              Voltar para login
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
