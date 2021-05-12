@@ -1,5 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/core/models/user.model';
 import { RoleService } from 'src/app/core/services/role.service';
@@ -28,17 +29,18 @@ export class ManageComponent extends BaseManageComponent<User> implements OnInit
     public formBuilder: FormBuilder,
     public router: Router,
     public roleSvc: RoleService,
+    public toastrSvc: ToastrService,
     public activatedRoute: ActivatedRoute
   ) {
     super();
-   }
+  }
 
   ngOnInit() {
     this.entityId = +this.activatedRoute.snapshot.params.id
     this.isView = this.activatedRoute.snapshot.routeConfig.path == 'view/:id'
 
     this.initForm();
-    if(!!this.entityId){
+    if (!!this.entityId) {
       this.getData(this.entityId).then(
         (response) => {
           this.fillForm(this.entityObject)
@@ -59,7 +61,7 @@ export class ManageComponent extends BaseManageComponent<User> implements OnInit
     this.f.email.setValue(entityObject.email);
     this.f.role.setValue(entityObject.role);
 
-    if(this.isView){
+    if (this.isView) {
       this.entityForm.disable()
     }
   }
@@ -76,22 +78,24 @@ export class ManageComponent extends BaseManageComponent<User> implements OnInit
     });
   }
 
-  successCreateCallback = (function (response){
+  successCreateCallback = (function (response) {
     this.router.navigate(['/admin/users'])
-    alert("Usuário criado com sucesso!")
+    this.toastrSvc.success("Usuário criado com sucesso!")
   }).bind(this)
 
-  successUpdateCallback = (function (response){
+  successUpdateCallback = (function (response) {
+    this.toastrSvc.success("Usuário atualizado com sucesso!")
     this.router.navigate(['/admin/users'])
-    alert("Usuário atualizado com sucesso!")
   }).bind(this)
 
-  errorCreateCallback = (function(error){
-    alert("Erro ao criar usuário!")
+  errorCreateCallback = (function (errorResponse) {
+    this.setInvalidErrorsToForm(errorResponse);
+    throw (errorResponse);
   }).bind(this)
 
-  errorUpdateCallback = (function(error){
-    alert("Erro ao atualizar usuário!")
+  errorUpdateCallback = (function (errorResponse) {
+    this.setInvalidErrorsToForm(errorResponse);
+    throw (errorResponse);
   }).bind(this)
 
   getRoles() {
@@ -101,6 +105,7 @@ export class ManageComponent extends BaseManageComponent<User> implements OnInit
       }
     )
   }
+
 
 
 

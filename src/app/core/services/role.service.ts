@@ -28,12 +28,12 @@ export class RoleService extends ResourceService<Role> {
         display_name: "Administrador"
       },
       {
-        id: UserRole.DOCTOR,
-        display_name: "Médico"
+        id: UserRole.USER,
+        display_name: "Usuário"
       },
       {
-        id: UserRole.CLINIC_EMPLOYEE,
-        display_name: "Func. Clínica"
+        id: UserRole.PARTNER,
+        display_name: "Fornecedor/Parceiro"
       },
     ])
     // map((data: any, index: number) => data.data = this.convertData(data.data))

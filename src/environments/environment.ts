@@ -7,6 +7,7 @@ import { EnvironmentSystem } from "@app/environments/environment.prod";
 export const environment: EnvironmentSystem = {
   production: false,
   apis:{
+    _papelaria_facil_api: 'http://localhost:3000',
     papelaria_facil_api: 'http://localhost/papelaria_facil_api/public/api'
   }
 };

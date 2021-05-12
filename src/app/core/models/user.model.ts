@@ -7,7 +7,6 @@ import { Doctor } from '@app/core/models/doctor.model';
 
 export class User extends Resource implements IResource {
     name: string;
-    username: string;
     cpf: string;
     email: string;
     email_verified_at: Date;

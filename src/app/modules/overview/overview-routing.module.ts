@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', component: OverviewComponent,
     canActivate: [AuthGuard], canActivateChild: [AuthGuard], canLoad: [AuthGuard]
   }
-];;
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

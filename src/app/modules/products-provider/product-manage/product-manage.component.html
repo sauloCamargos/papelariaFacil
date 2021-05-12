@@ -1,0 +1,66 @@
+<div class="d-flex gap-h-15 flex-wrap">
+  <div class="item-flex">
+    <div class="box box-primary h-100">
+      <h3>Informações do fornecedor</h3>
+      <strong>Nome:</strong> {{ productProvider?.name}}<br>
+      <strong>Nome fantasia:</strong> {{ productProvider?.company_name}}<br>
+      <strong>Telefone:</strong> {{ productProvider?.phone}}
+    </div>
+  </div>
+</div>
+<br>
+<div class="d-flex gap-h-15 flex-wrap">
+  <div class="item-flex" *ngIf="entityForm">
+    <div class="box box-primary h-100">
+      <h3>Dados gerais do produto</h3>
+      <form (ngSubmit)="onSubmit()" [formGroup]="entityForm">
+        <div class="box-body">
+          <div class="d-flex gap-h-15 flex-wrap">
+            <mat-form-field class="item-flex">
+              <mat-label>Produto:</mat-label>
+              <mat-select formControlName="product_id" >
+                <mat-option [value]="null">Selecione um opção</mat-option>
+                <mat-option [value]="product.id" *ngFor="let product of productsList">{{product.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.product_id.errors?.invalid">{{f.product_id.errors?.invalid}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="d-flex gap-h-15 flex-wrap">
+            <mat-form-field class="item-flex">
+              <mat-label>Valor:</mat-label>
+              <input matInput type="text" formControlName="amount" class="form-control">
+              <mat-error *ngIf="f.amount.errors?.invalid">{{f.amount.errors?.invalid}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="item-flex">
+              <mat-label>Detalhes:</mat-label>
+              <input matInput type="text" formControlName="description" class="form-control">
+              <mat-error *ngIf="f.description.errors?.invalid">{{f.description.errors?.invalid}}</mat-error>
+            </mat-form-field>
+
+
+          </div>
+        </div>
+        <div class="box-footer form-actions">
+          <a *ngIf="entityId" [routerLink]="[ './../../../' ]" mat-stroked-button>Voltar</a>
+          <a *ngIf="!entityId" [routerLink]="[ './../../' ]" mat-stroked-button>Voltar</a>
+          <button mat-flat-button *ngIf="!!!isView" [disabled]="entityForm.invalid || inLoading" type="submit"
+            class="btn-success">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="item-flex" >
+
+    <div class="box box-primary" *ngIf="entityForm && entityObject">
+      <h3>Imagem</h3>
+      <div class="box-body">
+
+        <uld-input-image [start_image]="initialImage" [name]="'file'"
+        [pathSendFile]="pathToSendImage"></uld-input-image>
+      </div>
+    </div>
+  </div>
+
+
+</div>

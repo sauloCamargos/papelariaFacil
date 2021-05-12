@@ -1,0 +1,25 @@
+<div class="rank-wrapper" *ngIf="rankProviders">
+  <table>
+    <tr class="rank-item-list" (click)="selectItem(rankProvider)" *ngFor="let rankProvider of rankProviders; let index = index">
+      <td>
+        <div class="position">
+          {{ index + 1 }}
+        </div>
+      </td>
+      <td>
+        <div class="brand-wrapper">
+          <img [src]="rankProvider?.brand?.url" alt="" srcset="">
+        </div>
+      </td>
+      <td [attr.title]="rankProvider.company_name">
+         {{rankProvider.company_name}}
+      </td>
+      <td>
+         {{rankProvider.missing_items_count || '-'}}
+      </td>
+      <td>
+        {{rankProvider.total_amount_list | currency}}
+      </td>
+    </tr>
+  </table>
+</div>

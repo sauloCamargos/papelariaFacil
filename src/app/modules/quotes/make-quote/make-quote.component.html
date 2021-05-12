@@ -1,0 +1,38 @@
+<div class="box box-primary">
+  <form (ngSubmit)="onSubmit()" [formGroup]="entityForm" *ngIf="entityForm">
+    <div class="box-body">
+      <div class="d-flex gap-h-15 flex-wrap">
+        <mat-form-field class="item-flex">
+          <mat-label>Escola</mat-label>
+          <mat-select (selectionChange)="setSuppliesLists()" formControlName="school_id">
+            <mat-option [value]="null">Selecione um opção</mat-option>
+            <mat-option [value]="school.id" *ngFor="let school of schoolsList">{{school.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.school_id.errors?.invalid">{{f.school_id.errors?.invalid}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="item-flex">
+          <mat-label>Lista</mat-label>
+          <mat-select formControlName="supplies_list_id">
+            <mat-option [value]="null">Selecione um opção</mat-option>
+            <mat-option [value]="schoolSuppliesList.id" *ngFor="let schoolSuppliesList of schoolSuppliesLists">
+              {{schoolSuppliesList.name}} - {{schoolSuppliesList.grade_name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.supplies_list_id.errors?.invalid">{{f.supplies_list_id.errors?.invalid}}
+          </mat-error>
+        </mat-form-field>
+
+
+      </div>
+    </div>
+
+    <div class="box-footer form-actions">
+      <button mat-flat-button [disabled]="entityForm.invalid || inLoading" type="submit"
+        class="btn-success">Cotar</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="rankProviders">
+  <app-ranking [rankProviders]='rankProviders'></app-ranking>
+</div>

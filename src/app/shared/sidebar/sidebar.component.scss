@@ -96,12 +96,12 @@ app-sidebar {
 .sidebar-logout {
   margin-top: 20px;
   padding: 10px;
-  color: #e65061;
+  color: $dangerColor;
 }
 
 .sidebar-logout > a {
   text-decoration: none;
-  color: #e65061;
+  color: $dangerColor;
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -112,7 +112,7 @@ app-sidebar {
 }
 
 @media only screen and (max-width: $breakpoint-lg) {
-  .container {
+  .content-wrapper {
     grid-template-columns: 1fr;
     /* grid-template-rows: 0.2fr 2.2fr; */
     grid-template-rows: 0.2fr 3fr;

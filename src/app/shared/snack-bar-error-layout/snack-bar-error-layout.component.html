@@ -1,0 +1,11 @@
+<div class="snack-bar-wrapper">
+  <div class="snack-bar-header">
+    <h3 *ngIf="data && data.title">
+      {{data.title}}
+    </h3>
+    <div class="snack-bar-close" (click)="snackRef.closeWithAction()">
+      <mat-icon>close</mat-icon>
+    </div>
+  </div>
+  <div class="snack-bar-content" *ngIf="data && data.message" [innerHtml]="data?.message"></div>
+</div>

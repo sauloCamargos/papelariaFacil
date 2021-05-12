@@ -1,0 +1,171 @@
+<div class="d-flex gap-h-15 flex-wrap">
+  <a *ngIf="entityId" [routerLink]="[ './../../../' ]" mat-stroked-button>
+    <i class="fas fa-arrow-circle-left"></i> Voltar
+  </a>
+  <a *ngIf="!entityId" [routerLink]="[ './../../' ]" mat-stroked-button>
+    <i class="fas fa-arrow-circle-left"></i> Voltar
+  </a>
+  <button mat-flat-button class="btn-success" (click)="doQuote()">
+    <i class="fas fa-calculator"></i> Quotar
+  </button>
+</div>
+<br>
+<div class="d-flex gap-h-15 flex-wrap">
+  <div class="item-flex">
+    <div class="box box-primary" *ngIf="entityForm">
+      <h3>Dados gerais da lista de metériais</h3>
+      <form (ngSubmit)="onSubmit()" [formGroup]="entityForm">
+        <div class="box-body">
+          <div class="d-flex gap-h-15 flex-wrap">
+            <mat-form-field class="item-flex">
+              <mat-label>Nome</mat-label>
+              <input matInput type="text" formControlName="name" class="form-control">
+              <mat-error *ngIf="f.name.errors?.invalid">{{f.name.errors?.invalid}}</mat-error>
+            </mat-form-field>
+
+
+          </div>
+        </div>
+        <div class="box-footer form-actions">
+
+          <button mat-stroked-button *ngIf="!!!isView" (click)="cancelChangesEntity()" [disabled]="inLoading"
+            type="button" class="btn btn-danger">Cancelar</button>
+          <button mat-flat-button *ngIf="!!!isView" [disabled]="entityForm.invalid || inLoading" type="submit"
+            class="btn-success">Salvar</button>
+        </div>
+      </form>
+    </div>
+    <div class="box box-primary">
+      <h3>Lista de produtos</h3>
+      <div class="box-body">
+        <div class="list-wrapper">
+          <mat-list>
+            <mat-list-item>
+              <div>Produto</div>
+              <div class="label-qtd">Quantidade</div>
+            </mat-list-item>
+            <mat-list-item checkboxPosition="before" *ngFor="let product of productsList">
+
+              <mat-checkbox class="example-margin" (change)="setSelectProduct($event, product)"
+                [(ngModel)]="product.checked" name="checked">{{product.name}}
+              </mat-checkbox>
+
+              <div class="input-quantity">
+                <input type="number" [(ngModel)]="product.quantity" min="1" [disabled]="!product.checked">
+              </div>
+              <!-- <mat-form-field>
+                <mat-label>Quantidade</mat-label>
+                <input matInput [(ngModel)]="product.quantity" min="1" type="number" class="form-control">
+                <mat-error *ngIf="f.name.errors?.invalid">{{f.name.errors?.invalid}}</mat-error>
+              </mat-form-field> -->
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div class="box-footer form-actions">
+        <button mat-stroked-button *ngIf="!!!isView" (click)="cancelSetProducts()" [disabled]="inLoading" type="button"
+          class="btn btn-danger">Cancelar</button>
+        <button mat-flat-button *ngIf="!!!isView" (click)="setProducts()" type="button"
+          class="btn-success">Salvar</button>
+      </div>
+    </div>
+  </div>
+  <div class="item-flex">
+    <div class="box box-primary h-100" *ngIf="rankProviders || loadingRanking">
+      <h3>Ranking de cotação</h3>
+      <div class="box-body h-100">
+        <div class="loading-wrapper" *ngIf="loadingRanking">
+          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        </div>
+        <app-ranking [rankProviders]="rankProviders" (changeSelect)="setSelectItemRank($event)"></app-ranking>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #detailItemRank let-data>
+
+  <div class="detail-wrapper">
+    <div class="detail-header">
+      <div class="provider-data">
+
+        <div class="wrapper-brand">
+          <img src="{{data.brand?.url}}" autofocus>
+        </div>
+        <div class="name">
+          {{data.name}}
+        </div>
+      </div>
+      <div class="icon-close">
+        <!-- <button class="btn btn-default" (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button> -->
+      </div>
+    </div>
+    <div class="detail-body">
+      <table>
+        <thead>
+          <tr>
+            <td colspan="4">
+              Produtos cotados
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left" >Produto</td>
+            <td class="text-center" >Quantidade</td>
+            <td class="text-right" >Valor</td>
+            <td class="text-right" >Total</td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let product of data?.products">
+            <td class="text-left">{{product.name}}</td>
+            <td class="text-center">{{product.quantity}}</td>
+            <td class="text-right">{{product.amount | currency}}</td>
+            <td class="text-right">{{product.total_amount | currency}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+
+          <tr>
+            <td colspan="3" class="text-left"><strong>Total</strong></td>
+            <td class="text-right" ><strong>{{data.total_amount_list | currency}}</strong></td>
+          </tr>
+        </tfoot>
+
+      </table>
+      <div class="missing-items-wrapper" *ngIf="data?.missing_items_count > 0">
+
+        <table>
+          <thead>
+            <tr>
+              <td colspan="2">
+                Produtos não inclusos
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">Produto</td>
+              <td class="text-center">Quantidade</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of data?.missing_items">
+              <td class="text-left">{{product.name}}</td>
+              <td class="text-center">{{product.quantity}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="detail-footer form-actions">
+      <button mat-stroked-button (click)="closeDetails()" type="button" autofocus
+          class="btn btn-danger">Cancelar</button>
+      <button mat-flat-button  (click)="createOrder(data)" type="button" class="btn-success" >Criar
+        pedido</button>
+    </div>
+  </div>
+
+  <!-- <<< Here is the problem data is undefined -->
+</ng-template>

@@ -40,20 +40,20 @@ export class BaseManageComponent<T extends IResource> {
   getData(entityId): Promise<any> {
     return new Promise((resolve, reject) => {
       this.entitySvc.read(entityId)
-      .pipe(
-        finalize(
-          this.completeRequest
+        .pipe(
+          finalize(
+            this.completeRequest
+          )
         )
-      )
-      .subscribe(
-        (response) => {
-          this.entityObject = response;
-          resolve()
-        },
-        (error) => {
-          reject(error)
-        }
-      )
+        .subscribe(
+          (response) => {
+            this.entityObject = response;
+            resolve(this.entityObject)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
     });
   }
 
@@ -63,6 +63,7 @@ export class BaseManageComponent<T extends IResource> {
   formatDataSend(dataSend) {
     return dataSend;
   }
+
 
   completeRequest = (function (response) {
     this.inLoading = false;
@@ -74,26 +75,46 @@ export class BaseManageComponent<T extends IResource> {
     this.inLoading = true;
     if (!!this.entityId) {
       this.entitySvc.update(this.entityId, dataSend)
-      .pipe(
-        finalize(
-          this.completeRequest
+        .pipe(
+          finalize(
+            this.completeRequest
+          )
         )
-      )
         .subscribe(
           this.successUpdateCallback,
           this.errorUpdateCallback,
         )
     } else {
       this.entitySvc.create(dataSend)
-      .pipe(
-        finalize(
-          this.completeRequest
+        .pipe(
+          finalize(
+            this.completeRequest
+          )
+        ).subscribe(
+          this.successCreateCallback,
+          this.errorCreateCallback
         )
-      ).subscribe(
-        this.successCreateCallback,
-        this.errorCreateCallback,
-        this.completeRequest
-      )
+    }
+  }
+
+  setInvalidErrorsToForm(errorResponse) {
+    if (errorResponse.status === 422) {
+      let errorObject = errorResponse.error.errors;
+      if (typeof errorObject === 'object') {
+        for (const key in errorObject) {
+          if (Object.prototype.hasOwnProperty.call(errorObject, key)) {
+            const element = errorObject[key];
+            let control = this.entityForm.get(key);
+            if (control) {
+              if(Array.isArray(element) && element[0]){
+                control.setErrors({ invalid: element[0] })
+              }else{
+                control.setErrors({ invalid: element })
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

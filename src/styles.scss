@@ -30,7 +30,24 @@ $papelariaFacil-theme: mat-light-theme(
   )
 );
 
+
+// regular style toast
+@import '~ngx-toastr/toastr';
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+// if you'd like to use it without importing all of bootstrap it requires
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+
 @import "./variables";
+// @import "./system-grid";
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -42,7 +59,27 @@ $papelariaFacil-theme: mat-light-theme(
 // body {
 //   height: 100%;
 // }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.h-100{
+  height: 100%;
+}
+@mixin display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Helvetica Neue", sans-serif;
+}
+
+.list-wrapper-responsive {
+  max-height: 450px;
+  overflow-x: auto;
+}
+
 // * {
 //   margin: 0;
 //   font-family: "Poppins", "Helvetica Neue", sans-serif;
@@ -112,83 +149,7 @@ $papelariaFacil-theme: mat-light-theme(
 //   }
 // }
 
-// .form-group {
-//   width: 100%;
-//   margin-bottom: 15px;
-//   &.invalid-group input {
-//     box-shadow: 0 3px 6px #f443369e;
-//     color: $dangerColor;
-//     &::placeholder {
-//       /* Chrome, Firefox, Opera, Safari 10.1+ */
-//       color: $dangerColor;
-//     }
-
-//     &:-ms-input-placeholder {
-//       /* Internet Explorer 10-11 */
-//       color: $dangerColor;
-//     }
-
-//     &::-ms-input-placeholder {
-//       /* Microsoft Edge */
-//       color: $dangerColor;
-//     }
-//   }
-// }
-
-// .btn-block {
-//   width: 100%;
-// }
-
-// input {
-//   padding: 20px;
-//   display: block;
-//   width: 100%;
-//   box-sizing: border-box;
-//   border-radius: 15px;
-//   border: none;
-//   box-shadow: 0px 3px 6px rgb(0 0 0 / 0.16);
-//   margin-bottom: 10px;
-// }
-
-// button {
-//   border: none;
-//   background: transparent;
-// }
-
-// .btn {
-//   min-height: 60px;
-//   border-radius: 15px;
-//   border: none;
-
-//   &.btn-success {
-//     background: #00cc47;
-//     color: #fff;
-//   }
-
-//   &:disabled {
-//     opacity: 0.6;
-//   }
-// }
-
-// .alert {
-//   padding: 15px;
-//   border-radius: 10px;
-//   margin-bottom: 20px;
-//   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-//   width: 100%;
-//   box-sizing: border-box;
-
-//   &.alert- {
-//     &danger {
-//       background: $dangerColor;
-//       color: #fff;
-//     }
-//   }
-// }
-
 // Estilo projeto
-
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
 
 /*  styling scrollbars  */
 ::-webkit-scrollbar {
@@ -210,14 +171,15 @@ $papelariaFacil-theme: mat-light-theme(
   background: #a5aaad;
 }
 
-*, body {
+*,
+body {
   margin: 0;
   padding: 0;
 }
 
 body {
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .text-primary-p {
@@ -250,7 +212,7 @@ body {
   color: #3b9668;
 }
 
-.container {
+.content-wrapper {
   display: grid;
   height: 100vh;
   grid-template-columns: 0.8fr 1fr 1fr 1fr;
@@ -504,11 +466,15 @@ main {
   font-size: 14px;
 }
 
-.module-wrapper{
-  animation: slideRight 0.3s ease-in-out;
+.module-wrapper {
+  h3 {
+    margin-bottom: 15px;
+    color: #239675;
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: normal;
+  }
 }
-
-
 
 @media only screen and (max-width: 855px) {
   .main-cards {
@@ -529,24 +495,263 @@ main {
   }
 }
 
+[animate="left"] {
+  animation: slideLeft 0.5s ease-out;
+}
+[animate="right"] {
+  animation: slideRight 0.5s ease-out;
+}
 
-@keyframes slideLeft{
-  0%{
+@keyframes slideLeft {
+  0% {
     transform: translateX(-20px);
     opacity: 0;
   }
-  100%{
+  100% {
     transform: translateX(0px);
     opacity: 1;
   }
 }
-@keyframes slideRight{
-  0%{
+@keyframes slideRight {
+  0% {
     transform: translateX(20px);
     opacity: 0;
   }
-  100%{
+  100% {
     transform: translateX(0px);
     opacity: 1;
+  }
+}
+
+table.mat-table {
+  width: 100%;
+}
+
+@for $i from 1 through 5 {
+  .delay-#{$i} {
+    animation-delay: calc(#{$i}s / 10);
+    animation-fill-mode: backwards;
+  }
+}
+
+.item-flex {
+  flex: 1;
+}
+
+@for $i from 1 through 25 {
+  .gap-h-#{$i} {
+    gap: 0px #{$i}px;
+  }
+  .gap-v-#{$i} {
+    gap: #{$i}px 0px;
+  }
+  .gap-#{$i} {
+    gap: #{$i}px;
+  }
+}
+
+@for $i from 1 through 100 {
+  .w-#{$i} {
+    width: calc(#{$i} * 1%);
+  }
+}
+
+.table-wrapper {
+  position: relative;
+  .loader-table-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 12px !important;
+  margin-bottom: 10px;
+}
+
+.mat-column-actions {
+  .mat-icon-button {
+    width: auto;
+    mat-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+.actions-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-success {
+  background: #00cc47;
+  color: #fff;
+}
+
+.box {
+  background: #fff;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 5px;
+
+
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.d-flex {
+  @include display-flex;
+}
+
+$options: wrap, nowrap, wrap-reverse;
+@each $var in $options {
+  .flex-#{$var} {
+    flex-wrap: $var;
+  }
+}
+
+.justify-content {
+  &-start {
+    justify-content: flex-start;
+  }
+  &-end {
+    justify-content: flex-end;
+  }
+  &-center {
+    justify-content: center;
+  }
+  &-space-between {
+    justify-content: space-between;
+  }
+  &-space-around {
+    justify-content: space-around;
+  }
+  &-space-evenly {
+    justify-content: space-evenly;
+  }
+}
+.align-content {
+  &-start {
+    align-content: flex-start;
+  }
+  &-end {
+    align-content: flex-end;
+  }
+  &-center {
+    align-content: center;
+  }
+  &-space-between {
+    align-content: space-between;
+  }
+  &-space-around {
+    align-content: space-around;
+  }
+  &-space-evenly {
+    align-content: space-evenly;
+  }
+}
+
+.table-responsive {
+  width: 100%;
+  overflow: auto;
+}
+
+th.mat-header-cell:not(:last-child):not(:first-child),
+td.mat-cell:not(:last-child):not(:first-child),
+td.mat-footer-cell:not(:last-child):not(:first-child) {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.mat-snack-bar-container {
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  margin: 24px;
+  max-width: 35vw;
+  min-width: 344px;
+  padding: 14px 16px;
+  min-height: 48px;
+  transform-origin: center;
+  &.error {
+    background-color: $dangerColor;
+    color: white;
+  }
+
+  &.error button {
+    background-color: orangered;
+    color: white;
+  }
+}
+
+.snack-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  .snack-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .snack-bar-close {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex: 1;
+    mat-icon {
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .snack-bar-content {
+    word-break: break-word;
+  }
+}
+
+
+.mat-column-actions {
+  text-align: right;
+}
+
+.mat-dialog-container{
+  padding: 0px !important;
+}
+
+.btn {
+  border: none;
+  padding: 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  cursor: pointer;
+}
+
+.text{
+  &-right{
+    text-align: right !important;
+  }
+  &-left{
+    text-align: left !important;
+  }
+  &-center{
+    text-align: center !important;
   }
 }

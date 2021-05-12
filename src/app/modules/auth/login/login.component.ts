@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit, OnChanges {
   createForm() {
     this.f = undefined;
     this.f = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required]]
+      email: ['saulo.camargos.sc@gmail.com', [Validators.required, Validators.email]],
+      password: ['teste', [Validators.required]]
     });
   }
 
@@ -46,11 +46,12 @@ export class LoginComponent implements OnInit, OnChanges {
     this.authService.login(this.f.value).subscribe(
       (resp) => {
         this.inLoading = false;
-        this.router.navigate(['overview']);
+        this.router.navigate(['admin']);
       },
       (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse)
         if (errorResponse.status === 401) {
-          this.errorCredentials = true;
+          this.errorCredentials = errorResponse.error.message;
         }
         this.inLoading = false;
       }

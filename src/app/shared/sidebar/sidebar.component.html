@@ -14,15 +14,33 @@
       <a [routerLink]="[ '/admin/overview' ]" >Dashboard</a>
 
     </div>
+    <h2>Geral</h2>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+      <a [routerLink]="[ '/admin/orders' ]">Pedidos</a>
+    </div>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+      <a [routerLink]="[ '/admin/quotes' ]">Cotação</a>
+    </div>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+      <a [routerLink]="[ '/admin/supplies-lists' ]">Listas</a>
+    </div>
     <h2>Gerenciamento</h2>
     <div class="sidebar-link" routerLinkActive="active_menu_link">
-
+      <a [routerLink]="[ '/admin/products-provider' ]">Fornecedor</a>
+    </div>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+      <a [routerLink]="[ '/admin/products' ]">Produtos</a>
+    </div>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
+      <a [routerLink]="[ '/admin/schools' ]">Escolas</a>
+    </div>
+    <div class="sidebar-link" routerLinkActive="active_menu_link">
       <a [routerLink]="[ '/admin/users' ]">Usuários</a>
     </div>
 
     <div class="sidebar-logout">
       <i class="fa fa-fw fa-power-off"></i>
-      <a href="#">Log out</a>
+      <a href="javascript:void(0)" (click)="authSvc.logout()">Log out</a>
     </div>
   </div>
 </div>

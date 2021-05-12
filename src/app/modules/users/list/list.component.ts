@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BaseListComponent } from 'src/app/shared/base-list/base-list.component';
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
@@ -6,11 +6,12 @@ import { environment } from 'src/environments/environment';
 import { UserRole } from 'src/app/core/enums/user.enum';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.sass']
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseListComponent<User> implements OnInit {
   confirmationDeleteMessage = 'Deseja realmente remover o usuário?'
@@ -19,11 +20,12 @@ export class ListComponent extends BaseListComponent<User> implements OnInit {
   environment = environment;
   UserRole = UserRole
   displayedColumns: string[] = [
+    'select',
+    'status',
     'name',
-    'username',
-    'cpf',
     'email',
-    'role'
+    'role',
+    'actions',
   ];
   selection = new SelectionModel<User>(true, []);
   constructor(
@@ -33,12 +35,16 @@ export class ListComponent extends BaseListComponent<User> implements OnInit {
   }
 
   ngOnInit() {
-    this.getDataFilter()
+    this.setDatasourcePaginator();
+    this.setPaginatorSubscription();
+    this.getDataFilter({
+      qtd: (this.paginator? this.paginator.pageSize : this.defaultPageSize)
+    })
   }
 
-  getDataFilter(e?) {
-    console.log(e)
-    this.getData(e)
+
+  initFilter(){
+    return new User
   }
 
   checkboxLabel(row?: User): string {

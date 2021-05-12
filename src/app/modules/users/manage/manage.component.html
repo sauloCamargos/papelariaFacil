@@ -1,76 +1,76 @@
-<div class="row">
-  <!-- <div class="col-md-3" *ngIf="entityObject">
-    <div class="box box-primary">
-      <div class="box-body box-profile">
-        <uld-input-image [start_image]="entityObject.image_profile?.url" [name]="'file'" [pathSendFile]="environment.apis.url_upload_file_profile" ></uld-input-image>
+<div class="d-flex gap-h-15 flex-wrap">
+  <a [routerLink]="[ './../../' ]" mat-stroked-button>
+    <i class="fas fa-arrow-circle-left"></i> Voltar
+  </a>
+</div>
+<br>
+<div class="d-flex gap-h-15 flex-wrap">
+  <div class="box box-primary item-flex">
+    <form (ngSubmit)="onSubmit()" [formGroup]="entityForm">
+      <div class="box-body">
+
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="name" class="form-control">
+          <mat-error *ngIf="f.name.errors?.invalid">{{f.name.errors?.invalid}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" class="form-control">
+          <mat-error *ngIf="f.email.errors?.invalid">{{f.email.errors?.invalid}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Perfil</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="null">Selecione um opção</mat-option>
+            <mat-option [value]="role.id" *ngFor="let role of rolesList">{{role.display_name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.role.errors?.invalid">{{f.role.errors?.invalid}}</mat-error>
+        </mat-form-field>
+
+        <div class="d-flex gap-h-15 flex-wrap">
+          <mat-form-field class="item-flex" *ngIf="!!!entityId">
+            <mat-label>Senha</mat-label>
+            <input matInput #passwordInput type="password" formControlName="password" class="form-control">
+            <button type="button" mat-icon-button matSuffix
+              (click)="passwordInput.type == 'text'? passwordInput.type = 'password': passwordInput.type = 'text'"
+              [attr.aria-label]="'Hide password'">
+              <mat-icon>{{passwordInput.type == 'password' ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="f.password.errors?.invalid">{{f.password.errors?.invalid}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="item-flex" *ngIf="!!!entityId">
+            <mat-label>Confirme a senha</mat-label>
+            <input matInput #confirmationPasswordInput type="password" formControlName="password_confirmation"
+              class="form-control">
+            <button type="button" mat-icon-button matSuffix
+              (click)="confirmationPasswordInput.type == 'text'? confirmationPasswordInput.type = 'password': confirmationPasswordInput.type = 'text'">
+              <mat-icon>{{confirmationPasswordInput.type == 'password' ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="f.password_confirmation.dirty && f.password_confirmation.errors?.required">Informe a
+              confirmação da senha</mat-error>
+            <mat-error *ngIf="f.password_confirmation.dirty && f.password_confirmation.errors?.mustMatch">A senha é
+              confirmação de senha não combinam</mat-error>
+            <mat-error *ngIf="f.password_confirmation.dirty && f.password_confirmation.errors?.invalid">
+              {{f.password_confirmation.errors?.invalid}}</mat-error>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-  </div> -->
-  <div class="col-md-9">
 
-    <div class="box box-primary">
-
-      <form (ngSubmit)="onSubmit()" [formGroup]="entityForm">
-        <div class="box-body">
-
-          <div class="form-group">
-            <label>Nome*</label>
-            <input type="text" formControlName="name" class="form-control">
-          </div>
-
-          <div class="form-group">
-            <label>Email* </label>
-            <input type="email" formControlName="email" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Perfil* </label>
-            <select formControlName="role" class="form-control">
-              <option [value]="null">Selecione uma opção</option>
-              <option [value]="role.id" *ngFor="let role of rolesList">{{role.display_name}}</option>
-            </select>
-
-          </div>
-          <div class="form-group" *ngIf="!!!entityId">
-            <label>Senha* </label>
-            <div class="input-group input-group-sm">
-              <input #passwordInput type="password" formControlName="password" class="form-control">
-              <span class="input-group-btn">
-                <button (click)="passwordInput.type == 'text'? passwordInput.type = 'password': passwordInput.type = 'text'" type="button" class="btn btn-flat btn-input">
-                  <i *ngIf="passwordInput.type == 'text'" class="fa fa-eye text-info"></i>
-                  <i *ngIf="passwordInput.type == 'password'" class="fa fa-eye-slash text-info"></i>
-                </button>
-              </span>
-            </div>
-          </div>
-          <div class="form-group" *ngIf="!!!entityId">
-            <label>Confirme a senha* </label>
-            <div class="input-group input-group-sm">
-              <input #confirmationPasswordInput type="password" formControlName="password_confirmation" class="form-control">
-              <span class="input-group-btn">
-                <button (click)="confirmationPasswordInput.type == 'text'? confirmationPasswordInput.type = 'password': confirmationPasswordInput.type = 'text'" type="button" class="btn  btn-flat btn-input">
-                  <i *ngIf="confirmationPasswordInput.type == 'text'" class="fa fa-eye text-info"></i>
-                  <i *ngIf="confirmationPasswordInput.type == 'password'" class="fa fa-eye-slash text-info"></i>
-                </button>
-              </span>
-            </div>
-            <p class='helpe-block' *ngIf="f.password_confirmation.dirty && f.password_confirmation.errors?.required">
-              Informe a confirmação da senha</p>
-            <p class='helpe-block' *ngIf="f.password_confirmation.dirty && f.password_confirmation.errors?.mustMatch">
-              Senhas não combinam</p>
-          </div>
+      <div class="box-footer form-actions">
+        <a [routerLink]="[ '/admin/users' ]" mat-stroked-button>Voltar</a>
+        <button mat-flat-button *ngIf="!!!isView" [disabled]="entityForm.invalid || inLoading" type="submit"
+          class="btn-success">Salvar</button>
+      </div>
+    </form>
+  </div>
 
 
-        </div>
-        <!-- /.box-body -->
-
-        <div class="box-footer">
-          <div class="pull-right">
-            <a [routerLink]="[ '/admin/users' ]" class="btn btn-default">Voltar</a>
-            <button *ngIf="!!!isView" [disabled]="entityForm.invalid || inLoading" type="submit" class="btn btn-primary">Salvar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
+  <div class="box item-flex" *ngIf="entityId">
+    <h3>Listas</h3>
+    <app-user-supplies-list></app-user-supplies-list>
   </div>
 </div>

@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-
+import { ErrorHandler, NgModule } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GlobalErrorHandler } from '@app/core/services/global-error-handler';
+import { UserService } from '@app/core/services/user.service';
 @NgModule({
   declarations: [],
   imports: [
-    HttpClientModule,
     CommonModule,
-    HttpClientModule
+    MatSnackBarModule,
   ],
-  exports:[
-    HttpClientModule
+  exports: [
   ],
-  providers: []
+  providers: [
+    UserService,
+    // { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  ]
 })
 export class CoreModule { }

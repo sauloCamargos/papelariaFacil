@@ -4,6 +4,7 @@ import { AuthGuard } from '@app/core/guards/auth.guard';
 import { ListComponent } from 'src/app/modules/users/list/list.component';
 import { ManageComponent } from 'src/app/modules/users/manage/manage.component';
 import { UsersComponent } from 'src/app/modules/users/users.component';
+import { SuppliesManageComponent } from './supplies-manage/supplies-manage.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,20 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         component: ManageComponent, data: {
           title: 'Alteração'
+        }
+      },
+      {
+        path: 'edit/:id/supplies-list/new', pathMatch: 'full',
+        canActivate: [],
+        component: SuppliesManageComponent, data: {
+          breadcrumb: 'Visualização'
+        }
+      },
+      {
+        path: 'edit/:id/supplies-list/edit/:idSupplies', pathMatch: 'full',
+        canActivate: [],
+        component: SuppliesManageComponent, data: {
+          breadcrumb: 'Alteração'
         }
       }
     ]

@@ -1,19 +1,14 @@
 .actions-wrapper {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-    margin: 10px 0px;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  margin: 10px 0px;
+  gap: 15px;
 }
-
-.actions-wrapper button {
-    flex: 1;
-}
-
-.hidden{
+.hidden {
   display: none;
 }
 
-.img-responsive{
-  width: 100%;
-  margin: 0px auto;
+.actions-wrapper button {
+  flex: 1;
 }

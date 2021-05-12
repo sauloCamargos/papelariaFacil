@@ -1,7 +1,7 @@
 export enum UserRole {
-    ADMIN = 1,
-    DOCTOR = 2,
-    CLINIC_EMPLOYEE = 3
+  ADMIN = 1,
+  USER = 2,
+  PARTNER = 3
 }
 
 export enum UserStatus{

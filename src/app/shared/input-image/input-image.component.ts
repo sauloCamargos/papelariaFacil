@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'pfa-input-image',
+  selector: 'uld-input-image',
   templateUrl: './input-image.component.html',
   styleUrls: ['./input-image.component.scss']
 })
@@ -26,11 +26,10 @@ export class InputImageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    console.log(this)
+
   }
 
   get previewUrl(){
-    console.log(this)
     if(this.imagePath && this.selectedFile){
       return this.imgURL;
     }

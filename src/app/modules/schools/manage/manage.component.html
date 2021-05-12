@@ -1,0 +1,50 @@
+<div class="d-flex gap-h-15 flex-wrap">
+  <a [routerLink]="[ './../../' ]" mat-stroked-button>
+    <i class="fas fa-arrow-circle-left"></i> Voltar
+  </a>
+</div>
+<br>
+<div class="d-flex gap-h-15 flex-wrap">
+  <div class="box item-flex">
+    <h3>Dados gerais</h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="entityForm">
+      <div class="box-body">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="name" class="form-control">
+          <mat-error *ngIf="f.name.errors?.invalid">{{f.name.errors?.invalid}}</mat-error>
+        </mat-form-field>
+        <div class="d-flex gap-h-15 flex-wrap">
+          <mat-form-field class="item-flex">
+            <mat-label>Estado</mat-label>
+            <mat-select (selectionChange)="setCitiesList()" formControlName="state" >
+              <mat-option [value]="state.sigla" *ngFor="let state of statesList">{{state.nome}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.state.errors?.invalid">{{f.state.errors?.invalid}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="item-flex">
+            <mat-label>Cidade</mat-label>
+            <mat-select formControlName="city" >
+              <mat-option [value]="city.nome" *ngFor="let city of citiesList">{{city.nome}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.city.errors?.invalid">{{f.city.errors?.invalid}}</mat-error>
+          </mat-form-field>
+
+
+        </div>
+      </div>
+      <div class="box-footer form-actions">
+        <button mat-stroked-button *ngIf="!!!isView" (click)="cancelChangesEntity()" [disabled]="inLoading"
+            type="button" class="btn btn-danger">Cancelar</button>
+        <button mat-flat-button *ngIf="!!!isView" [disabled]="entityForm.invalid || inLoading" type="submit"
+          class="btn-success">Salvar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="box item-flex" *ngIf="entityId">
+    <h3>Listas</h3>
+    <app-supplies-list></app-supplies-list>
+  </div>
+</div>

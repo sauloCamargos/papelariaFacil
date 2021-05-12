@@ -1,0 +1,184 @@
+<div class="header-wrapper">
+  <div class="menu-list">
+    <div class="menu-item">
+      <a href="#">
+        Quem somos
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Como funciona
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Seja fornecedor
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Pesquiser
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Acesse
+      </a>
+    </div>
+  </div>
+  <div class="brand-wrapper">
+    <img src="/assets/img/logo.png" alt="" srcset="">
+  </div>
+  <div class="slogan-wrapper">
+    <h4>
+      Comprar Material Escolar, Escritório e itens de Papelaria <span>ficou mais Fácil !!</span>
+    </h4>
+  </div>
+  <div class="thumbs-wrapper">
+    <div class="search-btn-wrapper">
+      <button class="search-btn">
+        <span>Pesquise sua lista</span>
+        <div>
+          <img src="/assets/img/search.svg" alt="" srcset="">
+        </div>
+      </button>
+    </div>
+    <div class="thumbs-list">
+      <div class="thumb-item" *ngFor="let thumb of thumbs">
+        <div class="thumb-image">
+          <img [src]="thumb.image" alt="" srcset="">
+        </div>
+        <div class="thumb-title">{{thumb.title}}</div>
+        <div class="thumb-content">{{thumb.content}}</div>
+      </div>
+    </div>
+    <div class="finish-step">
+      <p> Agora é só aguardar e receber sua compra em casa.. <span>Sem filas, Sem trânsito, Sem demora..</span></p>
+      <p>Se preferir você pode retirar pessoalmente.</p>
+    </div>
+  </div>
+</div>
+
+<div class="menu-sticky-wrapper">
+  <div class="brand-wrapper">
+    <img src="/assets/img/logo.png" alt="" srcset="">
+  </div>
+  <div class="menu-list">
+    <div class="menu-item">
+      <a href="#">
+        Quem somos
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Como funciona
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Seja fornecedor
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Pesquiser
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="#">
+        Acesse
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="session-content search-session">
+  <div class="title">
+    <h3>
+      Fácil né!?! Comece a economizar agora!
+    </h3>
+    <h4>
+      Faça uma pesquisa agora mesmo!
+    </h4>
+  </div>
+  <div class="action-wrapper">
+    <div class="inputs-wrapper">
+      <select name="" id="">
+        <option value="">Selecione a escola</option>
+      </select>
+      <select name="" id="">
+        <option value="">Selecione a serie</option>
+      </select>
+    </div>
+    <div class="button-wrapper">
+      <button class="btn btn-quote">
+        Orçar
+      </button>
+    </div>
+  </div>
+  <div class="description-wrapper">
+    <p>
+      Seu interesse é por Material de Escritório?
+    </p>
+    <p>
+      Clique aqui! E crie agora mesmo sua lista personalizada
+    </p>
+  </div>
+</div>
+
+<div class="session-content session-provider">
+  <div class="banner-wrapper">
+    <img src="/assets/img/banner_fornecedores@2x.png" alt="" srcset="">
+  </div>
+  <div class="content-provider-wrapper">
+    <h3>
+      Seja um Fornecedor!!<br>
+      Cadastre sua Papelaria
+    </h3>
+    <p>
+      Seja visto por mais clientes.<br>
+      Envie uma mensagem pra gente agora mesmo!!
+    </p>
+    <button class="btn btn-contact">
+      Entre em contato
+    </button>
+  </div>
+</div>
+
+<div class="session-content session-contact">
+
+  <div class="content-contact-wrapper">
+    <h3>
+      Alguma dúvida ?
+    </h3>
+    <p>
+      Precisou de nós, ou tem algo que queira nos dizer
+      contate-nos pelos meio abaixo ou formulário ao lado.
+      Que para nos será um prazer responde-los.
+    </p>
+    <div class="social-medias">
+      <span><i class="fab fa-facebook-f"></i></span>
+      <span><i class="fab fa-twitter" aria-hidden="true"></i></span>
+      <span><i class="fab fa-youtube" aria-hidden="true"></i></span>
+      <span><i class="fab fa-instagram" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="contacts-info">
+      <div class="contact-item">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i> (41)9 9923-5583
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope" aria-hidden="true"></i> contato@papelariafacil.com.br
+      </div>
+    </div>
+  </div>
+  <div class="form-wrapper">
+    <input class="fw50" type="text" placeholder="Nome">
+    <input class="fw50" type="email" placeholder="Email">
+    <input class="fw100" type="text" placeholder="Assunto">
+    <textarea class="fw100" placeholder="Mensagem" id="" cols="30" rows="10"></textarea>
+    <button class="btn btn-contact">
+      Enviar
+    </button>
+  </div>
+</div>

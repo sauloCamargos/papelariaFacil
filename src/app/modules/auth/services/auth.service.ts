@@ -14,7 +14,7 @@ import { User } from '@app/core/models/user.model';
   providedIn: "root"
 })
 export class AuthService {
-
+  public apiVersion = ''
   constructor(private http: HttpClient, private router: Router) { }
 
   check(): boolean {
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   login(credentials: { email: string, password: string }): Observable<boolean> {
-    return this.http.post<any>(`${environment.apis.papelaria_facil_api}/auth/token`, credentials)
+    return this.http.post<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/auth/token`, credentials)
       .pipe(
         tap(data => {
           localStorage.setItem('access_token', data.access_token);
@@ -36,7 +36,7 @@ export class AuthService {
 
   resendEmailVerifying(credentials): Observable<boolean> {
     return this.http
-      .post<any>(`${environment.apis.papelaria_facil_api}/email/resend`, credentials);
+      .post<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/email/resend`, credentials);
   }
 
   verifyEmail(dataSend): Observable<boolean> {
@@ -46,12 +46,12 @@ export class AuthService {
     }
     queryString = !!queryString ? `?${queryString}` : "";
     return this.http
-      .get<any>(`${environment.apis.papelaria_facil_api}/email/verify/${dataSend.id}/${dataSend.hash}${queryString}`);
+      .get<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/email/verify/${dataSend.id}/${dataSend.hash}${queryString}`);
   }
 
   logout(): void {
     this.http
-      .post(`${environment.apis.papelaria_facil_api}/logout`, {})
+      .post(`${environment.apis.papelaria_facil_api}${this.apiVersion}/logout`, {})
       .subscribe(
         resp => {
           localStorage.clear();
@@ -90,7 +90,7 @@ export class AuthService {
   }
 
   setUser(): Observable<any> {
-    return this.http.get<any>(`${environment.apis.papelaria_facil_api}/auth`)
+    return this.http.get<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/auth`)
       .pipe(
         tap(data => {
           if (data.user) {
@@ -104,11 +104,11 @@ export class AuthService {
   }
 
   resetPassword(data: any) {
-    return this.http.post<any>(`${environment.apis.papelaria_facil_api}/password/email`, data);
+    return this.http.post<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/password/email`, data);
   }
 
   setNewPassword(data: any) {
-    return this.http.post<any>(`${environment.apis.papelaria_facil_api}/password/reset`, data);
+    return this.http.post<any>(`${environment.apis.papelaria_facil_api}${this.apiVersion}/password/reset`, data);
   }
 
 }

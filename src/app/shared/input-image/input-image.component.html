@@ -3,7 +3,8 @@
 <input class="hidden" #fileInput type="file" accept='image/*' (change)="onFileChanged($event)" />
 
 <div class="actions-wrapper" *ngIf="!disabled">
-  <button type="button" (click)="fileInput.click()" class="btn btn-default">Selecionar</button>
-  <button type="button" (click)="onUpload()" class="btn btn-primary">Enviar</button>
+  <button type="button" (click)="fileInput.click()" mat-stroked-button >Selecionar</button>
+  <button type="button" (click)="onUpload()"  mat-flat-button class="btn-success">Enviar</button>
   <span class="text-danger" *ngIf="message">{{message}}</span>
 </div>
+

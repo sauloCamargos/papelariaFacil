@@ -62,7 +62,7 @@ export class NotificationService {
         body: item.alertContent,
         renotify: true,
         tag: String((new Date().getTime())),
-        icon: "http://"+window.location.hostname+"/assets/img/img-notification.png"
+        icon: "http://" + window.location.hostname + "/assets/img/img-notification.png"
       };
       let notify = self.create(item.title, options).subscribe();
     })
